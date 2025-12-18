@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Code Generator</title>
+</head>
+<body>
+
+<h2>AI Multi-Agent Code Generator</h2>
+
+<input id="title" placeholder="Title"><br><br>
+<textarea id="userStory" placeholder="User Story"></textarea><br><br>
+<textarea id="acceptanceCriteria" placeholder="Acceptance Criteria"></textarea><br><br>
+<input id="techStack" placeholder="Tech Stack"><br><br>
+
+<button onclick="generate()">Generate</button>
+
+<pre id="output"></pre>
+
+<script>
+async function generate() {
+  document.getElementById("output").innerText = "Generating...";
+
+  const data = {
+    title: document.getElementById("title").value,
+    userStory: document.getElementById("userStory").value,
+    acceptanceCriteria: document.getElementById("acceptanceCriteria").value,
+    techStack: document.getElementById("techStack").value
+  };
+
+  const response = await fetch("https://hook.us2.make.com/bms5vwl9vgkk974nhz6gja9cf03x0xou", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  });
+
+  const result = await response.json();
+  document.getElementById("output").innerText =
+    JSON.stringify(result, null, 2);
+}
+</script>
+
+</body>
+</html>
